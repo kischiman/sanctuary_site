@@ -343,8 +343,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
         <iframe id="modelIframe" title="Goddess Rhea — Sanctuary"
           allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen
           mozallowfullscreen="true" webkitallowfullscreen="true"
-          execution-while-out-of-viewport execution-while-not-rendered web-share
-          src="https://sketchfab.com/models/99ffb853bbc443bbbf9f957aea85a997/embed?autostart=1&amp;preload=1&amp;transparent=1&amp;ui_theme=dark&amp;ui_infos=0&amp;ui_controls=0&amp;ui_stop=0&amp;ui_watermark=0&amp;ui_watermark_link=0&amp;ui_hint=0&amp;ui_ar=0&amp;ui_help=0&amp;ui_settings=0&amp;ui_vr=0&amp;ui_fullscreen=0&amp;ui_annotations=0&amp;ui_loading=0&amp;scrollwheel=0&amp;autospin=0.08&amp;dnt=1&amp;ui_animations=0">
+          execution-while-out-of-viewport execution-while-not-rendered web-share>
         </iframe>
       </div>
       <div class="model-veil" aria-hidden="true"></div>
@@ -494,6 +493,47 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
   <span class="meta">Kobe · 7–25 October MMXXVI</span>
   <span class="meta">By invitation · A private cohort</span>
 </footer>
+
+<!-- Sketchfab Viewer API: rest on one side (no auto-spin) + clamp manual rotation to 180° -->
+<script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+<script>
+(function(){
+  var iframe = document.getElementById('modelIframe');
+  if(!iframe || typeof Sketchfab === 'undefined') return;
+  var UID = '99ffb853bbc443bbbf9f957aea85a997';
+  var client = new Sketchfab(iframe);
+  client.init(UID, {
+    autostart: 1, preload: 1, transparent: 1,
+    ui_theme: 'dark', ui_infos: 0, ui_controls: 0, ui_stop: 0,
+    ui_watermark: 0, ui_watermark_link: 0, ui_hint: 0, ui_ar: 0,
+    ui_help: 0, ui_settings: 0, ui_vr: 0, ui_fullscreen: 0,
+    ui_annotations: 0, ui_loading: 0, scrollwheel: 0,
+    autospin: 0,        // rest on one side instead of rotating
+    dnt: 1, ui_animations: 0,
+    success: function(api){
+      api.start();
+      api.addEventListener('viewerready', function(){
+        // Read the side the model rests on, then allow only ±90° of yaw (180° total).
+        // Sketchfab's API uses a Z-up frame, so azimuth lives in the X/Y plane.
+        api.getCameraLookAt(function(err, camera){
+          if(err) return;
+          var p = camera.position, t = camera.target;
+          var az = Math.atan2(p[1] - t[1], p[0] - t[0]);
+          var half = Math.PI / 2; // 90° each way
+          api.setEnableCameraConstraints(true, {
+            useYawConstraints: true,
+            left:  az + half,
+            right: az - half,
+            usePitchConstraints: false,
+            usePanConstraints: false
+          });
+        });
+      });
+    },
+    error: function(){ /* leave the iframe empty on failure */ }
+  });
+})();
+</script>
 
 <script>
 // reveal on scroll
