@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanctuary — Kobe · A safe space for high performers</title>
+<title>Sanctuary — Kobe · A curated residency for high performers</title>
 <meta name="description" content="A private, personalised two-week experience in the mountains above Kobe, Japan — for a curated group of visionaries at the frontier of longevity and biotech. 7–25 October.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,7 +121,7 @@ header.nav{
 }
 
 /* hero typographic layers (float over the model) */
-.hero-foot{position:absolute;top:50%;left:0;right:0;transform:translateY(calc(-50% + 200px));z-index:3;pointer-events:none}
+.hero-foot{position:absolute;top:50%;left:0;right:0;transform:translateY(calc(-50% + clamp(70px,16vh,200px)));z-index:3;pointer-events:none}
 .hero-eyebrow{display:block;margin:0 auto 1.6rem;color:#ffffff}
 .hero h1{
   font-family:var(--serif);font-weight:300;
@@ -166,7 +166,7 @@ header.nav{
   100%{box-shadow:0 0 0 0 rgba(14,14,14,0)}
 }
 .scroll-cue{
-  margin:2.6rem auto 0;
+  margin:1.8rem auto 0;
   display:flex;flex-direction:column;align-items:center;gap:.9rem;
   z-index:4;pointer-events:none;
 }
@@ -357,7 +357,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
       <span class="eyebrow hero-eyebrow">Exclusive Private Experience</span>
       <h1>Sanctuary</h1>
       <span class="place">Kobe, Japan&nbsp;&nbsp;·&nbsp;&nbsp;7–25 October</span>
-      <p class="sub">A safe space for high performers.</p>
+      <p class="sub">A curated residency for high performers.</p>
       <a href="mailto:hello@sanctuary.studio?subject=Sanctuary%20Kobe%20%E2%80%94%20Request%20to%20join" class="hero-cta">
         <span class="dot"></span>Request an introduction
       </a>
