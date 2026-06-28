@@ -518,10 +518,11 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
           if(err) return;
           var t  = camera.target;
           var p  = camera.position;
-          var az0 = Math.atan2(p[1] - t[1], p[0] - t[0]); // resting azimuth (centre)
+          var recenter = -10 * Math.PI / 180;              // nudge centre ~10°; flip sign if wrong way
+          var az0 = Math.atan2(p[1] - t[1], p[0] - t[0]) + recenter; // recentred azimuth
           var rH  = Math.hypot(p[0] - t[0], p[1] - t[1]);  // horizontal radius
           var zH  = p[2] - t[2];                            // keep height/pitch fixed
-          var half = Math.PI / 2;                           // 90° each way -> 180° total
+          var half = Math.PI / 2;                           // 90° each way -> 180° manual limit
 
           // Hard limit: covers manual dragging so it can never pass the edge.
           api.setEnableCameraConstraints(true, {
@@ -534,7 +535,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
 
           // Gentle automatic rotation that sweeps left<->right INSIDE the arc and eases
           // at the edges (sine), never reaching the back. Yields when the user interacts.
-          var amp   = half * 0.92;          // stay just shy of the hard edge
+          var amp   = 70 * Math.PI / 180;   // 70° each way -> 140° total sweep
           var omega = 2 * Math.PI / 22000;  // ~22s for a full left-right-left sweep
           var t0    = performance.now();
           var userActive = false, programmatic = false, resumeTimer = 0;
