@@ -494,7 +494,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
   <span class="meta">By invitation · A private cohort</span>
 </footer>
 
-<!-- Sketchfab Viewer API: rest on one side (no auto-spin) + clamp manual rotation to 180° -->
+<!-- Sketchfab Viewer API: auto-rotate within a 180° front arc (sweeps back, never the rear) + clamp manual rotation to the same edge -->
 <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
 <script>
 (function(){
@@ -513,20 +513,63 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
     success: function(api){
       api.start();
       api.addEventListener('viewerready', function(){
-        // Read the side the model rests on, then allow only ±90° of yaw (180° total).
-        // Sketchfab's API uses a Z-up frame, so azimuth lives in the X/Y plane.
+        // Sketchfab's API uses a Z-up frame, so horizontal azimuth lives in the X/Y plane.
         api.getCameraLookAt(function(err, camera){
           if(err) return;
-          var p = camera.position, t = camera.target;
-          var az = Math.atan2(p[1] - t[1], p[0] - t[0]);
-          var half = Math.PI / 2; // 90° each way
+          var t  = camera.target;
+          var p  = camera.position;
+          var az0 = Math.atan2(p[1] - t[1], p[0] - t[0]); // resting azimuth (centre)
+          var rH  = Math.hypot(p[0] - t[0], p[1] - t[1]);  // horizontal radius
+          var zH  = p[2] - t[2];                            // keep height/pitch fixed
+          var half = Math.PI / 2;                           // 90° each way -> 180° total
+
+          // Hard limit: covers manual dragging so it can never pass the edge.
           api.setEnableCameraConstraints(true, {
             useYawConstraints: true,
-            left:  az + half,
-            right: az - half,
+            left:  az0 + half,
+            right: az0 - half,
             usePitchConstraints: false,
             usePanConstraints: false
           });
+
+          // Gentle automatic rotation that sweeps left<->right INSIDE the arc and eases
+          // at the edges (sine), never reaching the back. Yields when the user interacts.
+          var amp   = half * 0.92;          // stay just shy of the hard edge
+          var omega = 2 * Math.PI / 22000;  // ~22s for a full left-right-left sweep
+          var t0    = performance.now();
+          var userActive = false, programmatic = false, resumeTimer = 0;
+
+          function moveTo(az){
+            var pos = [ t[0] + rH * Math.cos(az), t[1] + rH * Math.sin(az), t[2] + zH ];
+            programmatic = true;
+            api.setCameraLookAt(pos, t, 0);
+            programmatic = false;
+          }
+          // While the user drags, pause the auto-sweep; resume shortly after they let go.
+          api.addEventListener('camerastart', function(){ if(!programmatic) userActive = true; });
+          api.addEventListener('camerastop', function(){
+            if(programmatic) return;
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(function(){
+              api.getCameraLookAt(function(e, c){
+                if(e) return;
+                var cp = c.position, ct = c.target;
+                rH = Math.hypot(cp[0]-ct[0], cp[1]-ct[1]);
+                zH = cp[2]-ct[2];
+                var curAz = Math.atan2(cp[1]-ct[1], cp[0]-ct[0]);
+                var s = Math.max(-1, Math.min(1, (curAz - az0) / amp));
+                t0 = performance.now() - Math.asin(s) / omega; // continue without a jump
+                userActive = false;
+              });
+            }, 2200);
+          });
+
+          function frame(now){
+            requestAnimationFrame(frame);
+            if(userActive) return;
+            moveTo(az0 + amp * Math.sin((now - t0) * omega));
+          }
+          requestAnimationFrame(frame);
         });
       });
     },
