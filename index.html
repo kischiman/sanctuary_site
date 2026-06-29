@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanctuary — A safe space for high performers</title>
-<meta name="description" content="A private, personalised two-week experience for a curated group of visionaries striving for excellence.">
+<title>Sanctuary — Kobe · A curated residency for high performers</title>
+<meta name="description" content="A private, personalised two-week experience in the mountains above Kobe, Japan — for a curated group of visionaries at the frontier of longevity and biotech. 7–25 October.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -60,6 +60,7 @@ main,header,footer{position:relative;z-index:1}
   letter-spacing:-.01em;
 }
 .script{font-family:var(--script);font-weight:400}
+.jp{font-family:var(--serif);font-weight:300;letter-spacing:.18em}
 
 /* ---------- nav ---------- */
 header.nav{
@@ -87,7 +88,7 @@ header.nav{
 .nav .logo path:nth-child(8){animation-delay:.58s}
 .nav .logo path:nth-child(9){animation-delay:.62s}
 @keyframes logoIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.nav nav{display:flex;gap:2.4rem}
+.nav nav{display:flex;gap:2.4rem;align-items:center}
 .nav nav a{
   font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
   color:#fff;text-decoration:none;font-weight:400;
@@ -120,7 +121,7 @@ header.nav{
 }
 
 /* hero typographic layers (float over the model) */
-.hero-foot{position:absolute;top:50%;left:0;right:0;transform:translateY(calc(-50% + 200px));z-index:3;pointer-events:none}
+.hero-foot{position:absolute;top:50%;left:0;right:0;transform:translateY(calc(-50% + clamp(70px,16vh,200px)));z-index:3;pointer-events:none}
 .hero-eyebrow{display:block;margin:0 auto 1.6rem;color:#ffffff}
 .hero h1{
   font-family:var(--serif);font-weight:300;
@@ -128,6 +129,12 @@ header.nav{
   line-height:.92;letter-spacing:-.02em;
   color:#ffffff;
   text-shadow:0 0 60px rgba(0,0,0,.6);
+}
+.hero .place{
+  display:block;margin-top:.7rem;
+  font-family:var(--sans);font-weight:400;
+  font-size:clamp(.62rem,1.4vw,.72rem);letter-spacing:.5em;text-transform:uppercase;
+  color:#ffffff;opacity:.82;
 }
 .hero .sub{
   margin-top:1.4rem;
@@ -159,7 +166,7 @@ header.nav{
   100%{box-shadow:0 0 0 0 rgba(14,14,14,0)}
 }
 .scroll-cue{
-  margin:2.6rem auto 0;
+  margin:1.8rem auto 0;
   display:flex;flex-direction:column;align-items:center;gap:.9rem;
   z-index:4;pointer-events:none;
 }
@@ -198,6 +205,32 @@ section{padding:clamp(6rem,14vh,12rem) var(--pad)}
 }
 @media(max-width:680px){.pillars{grid-template-columns:1fr}}
 
+/* ---------- location ---------- */
+.place-wrap{max-width:1080px;margin:0 auto}
+.place-figure{
+  position:relative;overflow:hidden;border-radius:2px;
+  border:1px solid var(--line);
+}
+.place-figure img{display:block;width:100%;height:auto;filter:saturate(.92) contrast(1.02)}
+.place-figure::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(14,14,14,.55) 100%);
+}
+.place-caption{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  margin-top:1.4rem;
+}
+.place-caption .k{font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-faint)}
+.place-caption .v{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft)}
+
+/* ---------- field trips (labs) ---------- */
+.labs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.6rem,4vw,3rem);max-width:1080px;margin:0 auto}
+.lab{border-top:1px solid var(--line);padding-top:1.6rem}
+.lab .n{font-family:var(--serif);font-size:1.1rem;color:var(--ink-faint);display:block;margin-bottom:1rem}
+.lab h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:.9rem;color:var(--ink)}
+.lab p{font-size:.92rem;color:var(--ink-soft)}
+@media(max-width:760px){.labs{grid-template-columns:1fr}}
+
 /* ---------- pricing ---------- */
 .pricing{text-align:center;max-width:620px;margin:0 auto}
 .pricing .figure{
@@ -206,6 +239,13 @@ section{padding:clamp(6rem,14vh,12rem) var(--pad)}
 }
 .pricing .from{display:block;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1rem}
 .pricing .per{margin-top:1.2rem;color:var(--ink-soft)}
+
+/* ---------- context note ---------- */
+.context{max-width:620px;margin:0 auto;text-align:center}
+.context .eyebrow{display:block;margin-bottom:1.4rem}
+.context p{color:var(--ink-soft);font-size:clamp(.95rem,1.4vw,1.1rem)}
+.context a.inline{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-faint);transition:border-color .4s}
+.context a.inline:hover{border-color:var(--ink)}
 
 /* ---------- footer ---------- */
 footer{
@@ -241,6 +281,8 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
 
 /* staggered children for grouped blocks */
 .pillars [data-reveal]:nth-child(2){transition-delay:.10s}
+.labs [data-reveal]:nth-child(2){transition-delay:.10s}
+.labs [data-reveal]:nth-child(3){transition-delay:.20s}
 
 /* clip-mask line-reveal for big section headings */
 .section-head h2{
@@ -285,8 +327,9 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
   </a>
   <nav>
     <a href="#experience">Experience</a>
-    <a href="#pricing">Pricing</a>
-    <a href="mailto:hello@sanctuary.studio?subject=Sanctuary%20%E2%80%94%20Request%20to%20join">Apply</a>
+    <a href="#location">Location</a>
+    <a href="#labs">Field trips</a>
+    <a href="mailto:hello@sanctuary.studio?subject=Sanctuary%20Kobe%20%E2%80%94%20Request%20to%20join">Apply</a>
   </nav>
 </header>
 
@@ -299,8 +342,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
         <iframe id="modelIframe" title="Goddess Rhea — Sanctuary"
           allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen
           mozallowfullscreen="true" webkitallowfullscreen="true"
-          execution-while-out-of-viewport execution-while-not-rendered web-share
-          src="https://sketchfab.com/models/99ffb853bbc443bbbf9f957aea85a997/embed?autostart=1&amp;preload=1&amp;transparent=1&amp;ui_theme=dark&amp;ui_infos=0&amp;ui_controls=0&amp;ui_stop=0&amp;ui_watermark=0&amp;ui_watermark_link=0&amp;ui_hint=0&amp;ui_ar=0&amp;ui_help=0&amp;ui_settings=0&amp;ui_vr=0&amp;ui_fullscreen=0&amp;ui_annotations=0&amp;ui_loading=0&amp;scrollwheel=0&amp;autospin=0.08&amp;dnt=1&amp;ui_animations=0">
+          execution-while-out-of-viewport execution-while-not-rendered web-share>
         </iframe>
       </div>
       <div class="model-veil" aria-hidden="true"></div>
@@ -312,8 +354,9 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
       </svg>
       <span class="eyebrow hero-eyebrow">Exclusive Private Experience</span>
       <h1>Sanctuary</h1>
-      <p class="sub">A safe space for high performers.</p>
-      <a href="mailto:hello@sanctuary.studio?subject=Sanctuary%20%E2%80%94%20Request%20to%20join" class="hero-cta">
+      <span class="place">Kobe, Japan&nbsp;&nbsp;·&nbsp;&nbsp;7–25 October</span>
+      <p class="sub">A curated residency for high performers.</p>
+      <a href="https://forms.fillout.com/t/b4EJyZFoVbus" target="_blank" rel="noopener" class="hero-cta">
         <span class="dot"></span>Request an introduction
       </a>
       <div class="scroll-cue"><span>SCROLL</span><div class="ln"></div></div>
@@ -324,8 +367,8 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
   <section id="intro">
     <div class="section-head" data-reveal>
       <span class="eyebrow">The Experience</span>
-      <h2>A transformative space</h2>
-      <p class="lede">A private, personalised experience for a curated group of visionaries striving for excellence.</p>
+      <h2>A transformative space in the mountains above Kobe</h2>
+      <p class="lede">A private, personalised experience for a curated group of visionaries striving for excellence — set against the frontier of longevity and human biology.</p>
     </div>
   </section>
 
@@ -339,10 +382,10 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
       <div class="pillar" data-reveal>
         <h3>Quality of Life</h3>
         <ul>
-          <li>Nutrition</li>
-          <li>Movement</li>
+          <li>Nutrition &amp; longevity protocols</li>
+          <li>Movement, onsen &amp; recovery</li>
           <li>Peptides, psychedelics, supplements</li>
-          <li>Intellectual stimulation</li>
+          <li>Diagnostics &amp; biomarkers</li>
         </ul>
       </div>
       <div class="pillar" data-reveal>
@@ -357,26 +400,75 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
     </div>
   </section>
 
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">The House</span>
+      <h2>A hillside retreat, held by the forest.</h2>
+      <p class="lede">A private residence carved into the green slopes above the city — terrace, court and quiet rooms, minutes from the sea and the laboratories of Port Island.</p>
+    </div>
+    <div class="place-wrap" data-reveal>
+      <figure class="place-figure">
+        <img src="location.png" alt="The Sanctuary residence set into a forested mountainside above Kobe, with terrace and private court." loading="lazy" width="960" height="540">
+      </figure>
+      <div class="place-caption">
+        <span class="k">Mountainside · Kobe&nbsp;六甲</span>
+        <span class="v">Where the forest meets the frontier.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD TRIPS / LABS -->
+  <section id="labs">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Field trips</span>
+      <h2>Inside the world's boldest biotech.</h2>
+      <p class="lede">Days are punctuated by private visits into the Kobe Biomedical Innovation Cluster — Japan's densest concentration of cell, gene and longevity research, opened to us under introduction.</p>
+    </div>
+    <div class="labs">
+      <div class="lab" data-reveal>
+        <span class="n">I</span>
+        <h3>Cell &amp; Gene Therapy</h3>
+        <p>Walk the floors where Japan's expedited pathways — Sakigake and conditional approval — turn frontier science into treatment faster than anywhere on earth.</p>
+      </div>
+      <div class="lab" data-reveal>
+        <span class="n">II</span>
+        <h3>AI × Bio &amp; Diagnostics</h3>
+        <p>Sessions with the labs pairing machine intelligence with living systems — protein design, biomarkers, and the next generation of diagnostics.</p>
+      </div>
+      <div class="lab" data-reveal>
+        <span class="n">III</span>
+        <h3>Longevity &amp; Biostasis</h3>
+        <p>Private conversations with researchers extending healthy human lifespan — from regenerative medicine to the science of preservation.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- DISCRETION -->
   <section id="discretion">
     <div class="section-head" data-reveal>
       <span class="eyebrow">Discretion</span>
-      <h2>What happens here, stays here.</h2>
-      <p class="lede">Privacy is the foundation, not a feature. Guests, practitioners and team are bound to the same confidentiality. The location is shared only on acceptance. No cameras, no press, no record — and no list your name could appear on.</p>
+      <h2>Privacy is the foundation, not a feature.</h2>
+      <p class="lede">Guests, practitioners and team are bound to the same confidentiality. The location is shared only on acceptance. No cameras, no press, no record — and no list your name could appear on.</p>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section id="pricing">
+  <!-- APPLY -->
+  <section id="apply">
     <div class="pricing" data-reveal>
-      <span class="from">Pricing per person, starting at</span>
-      <div class="figure">€30,000</div>
-      <a href="mailto:hello@sanctuary.studio?subject=Sanctuary%20%E2%80%94%20Request%20to%20join" class="hero-cta">
+      <a href="https://forms.fillout.com/t/b4EJyZFoVbus" target="_blank" rel="noopener" class="hero-cta">
         <span class="dot"></span>Request an introduction
       </a>
     </div>
   </section>
 
+  <!-- CONTEXT -->
+  <section id="context">
+    <div class="context" data-reveal>
+      <span class="eyebrow">Set within</span>
+      <p>Sanctuary · Kobe takes place in the context of <a class="inline" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Mirai Tech Pop-Up City</a> — a month of longevity biomedical in Japan, gathered to keep the doors of borderless biotech open.</p>
+    </div>
+  </section>
 
 </main>
 
@@ -395,9 +487,94 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
       <path fill-rule="evenodd" clip-rule="evenodd" d="M33.3383 0C33.3383 8.31944 36.4342 16.1131 41.8671 21.5178C47.5164 16.9571 54.6766 14.23 62.4616 14.23V17.2079C56.1934 17.2079 49.6153 19.5458 44.7554 23.0529C44.3985 23.3105 43.9727 23.4545 43.5339 23.4545V24.2727C43.9723 24.2727 44.3973 24.4193 44.7504 24.6816C49.6233 28.3008 56.0278 30.7921 62.4616 30.7921V33.77C54.6766 33.77 47.5164 31.0429 41.8671 26.4822C36.4342 31.8869 33.3383 39.6806 33.3383 48H29.1234C29.1234 39.6805 26.0272 31.8869 20.5942 26.4822C14.945 31.0428 7.78498 33.77 0 33.77V30.7921C6.11258 30.7921 12.2845 28.2589 17.0799 24.8318C17.5814 24.4733 18.1779 24.2727 18.7926 24.2727V23.4545C18.1779 23.4545 17.5816 23.2535 17.0788 22.8968C12.2836 19.4952 6.11213 17.2079 0 17.2079V14.23C7.78498 14.23 14.945 16.9572 20.5942 21.5178C26.0272 16.1131 29.1234 8.3195 29.1234 0H33.3383ZM30.7412 10.5004C30.7412 11.4031 30.6014 12.3038 30.2691 13.1419C28.8321 16.7664 26.9402 20.0037 24.3199 22.769C23.9013 23.2106 23.0486 23.4545 22.4429 23.4545V24.2727C23.0486 24.2727 23.9013 24.7894 24.3199 25.231C26.9402 27.9963 28.8321 31.188 30.2691 34.8125C30.6014 35.6506 30.7412 36.5513 30.7412 37.454H31.7716C31.7716 36.5513 31.9114 35.6506 32.2437 34.8125C33.6808 31.188 35.5727 27.7236 38.193 24.9583C38.6115 24.5167 39.1939 24.2727 39.7995 24.2727V23.4545C39.1939 23.4545 38.6115 23.2106 38.193 22.769C35.5727 20.0037 33.6808 16.7664 32.2437 13.1419C31.9114 12.3038 31.7716 11.4031 31.7716 10.5004H30.7412Z"/>
     </svg>
   </span>
-  <span class="meta">By invitation · MMXXVI</span>
-  <span class="meta">A private cohort</span>
+  <span class="meta">Kobe · 7–25 October MMXXVI</span>
+  <span class="meta">By invitation · A private cohort</span>
 </footer>
+
+<!-- Sketchfab Viewer API: auto-rotate within a 180° front arc (sweeps back, never the rear) + clamp manual rotation to the same edge -->
+<script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+<script>
+(function(){
+  var iframe = document.getElementById('modelIframe');
+  if(!iframe || typeof Sketchfab === 'undefined') return;
+  var UID = '99ffb853bbc443bbbf9f957aea85a997';
+  var client = new Sketchfab(iframe);
+  client.init(UID, {
+    autostart: 1, preload: 1, transparent: 1,
+    ui_theme: 'dark', ui_infos: 0, ui_controls: 0, ui_stop: 0,
+    ui_watermark: 0, ui_watermark_link: 0, ui_hint: 0, ui_ar: 0,
+    ui_help: 0, ui_settings: 0, ui_vr: 0, ui_fullscreen: 0,
+    ui_annotations: 0, ui_loading: 0, scrollwheel: 0,
+    autospin: 0,        // rest on one side instead of rotating
+    dnt: 1, ui_animations: 0,
+    success: function(api){
+      api.start();
+      api.addEventListener('viewerready', function(){
+        // Sketchfab's API uses a Z-up frame, so horizontal azimuth lives in the X/Y plane.
+        api.getCameraLookAt(function(err, camera){
+          if(err) return;
+          var t  = camera.target;
+          var p  = camera.position;
+          var recenter = -10 * Math.PI / 180;              // nudge centre ~10°; flip sign if wrong way
+          var az0 = Math.atan2(p[1] - t[1], p[0] - t[0]) + recenter; // recentred azimuth
+          var rH  = Math.hypot(p[0] - t[0], p[1] - t[1]);  // horizontal radius
+          var zH  = p[2] - t[2];                            // keep height/pitch fixed
+          var half = Math.PI / 2;                           // 90° each way -> 180° manual limit
+
+          // Hard limit: covers manual dragging so it can never pass the edge.
+          api.setEnableCameraConstraints(true, {
+            useYawConstraints: true,
+            left:  az0 + half,
+            right: az0 - half,
+            usePitchConstraints: false,
+            usePanConstraints: false
+          });
+
+          // Gentle automatic rotation that sweeps left<->right INSIDE the arc and eases
+          // at the edges (sine), never reaching the back. Yields when the user interacts.
+          var amp   = 70 * Math.PI / 180;   // 70° each way -> 140° total sweep
+          var omega = 2 * Math.PI / 22000;  // ~22s for a full left-right-left sweep
+          var t0    = performance.now();
+          var userActive = false, programmatic = false, resumeTimer = 0;
+
+          function moveTo(az){
+            var pos = [ t[0] + rH * Math.cos(az), t[1] + rH * Math.sin(az), t[2] + zH ];
+            programmatic = true;
+            api.setCameraLookAt(pos, t, 0);
+            programmatic = false;
+          }
+          // While the user drags, pause the auto-sweep; resume shortly after they let go.
+          api.addEventListener('camerastart', function(){ if(!programmatic) userActive = true; });
+          api.addEventListener('camerastop', function(){
+            if(programmatic) return;
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(function(){
+              api.getCameraLookAt(function(e, c){
+                if(e) return;
+                var cp = c.position, ct = c.target;
+                rH = Math.hypot(cp[0]-ct[0], cp[1]-ct[1]);
+                zH = cp[2]-ct[2];
+                var curAz = Math.atan2(cp[1]-ct[1], cp[0]-ct[0]);
+                var s = Math.max(-1, Math.min(1, (curAz - az0) / amp));
+                t0 = performance.now() - Math.asin(s) / omega; // continue without a jump
+                userActive = false;
+              });
+            }, 2200);
+          });
+
+          function frame(now){
+            requestAnimationFrame(frame);
+            if(userActive) return;
+            moveTo(az0 + amp * Math.sin((now - t0) * omega));
+          }
+          requestAnimationFrame(frame);
+        });
+      });
+    },
+    error: function(){ /* leave the iframe empty on failure */ }
+  });
+})();
+</script>
 
 <script>
 // reveal on scroll
