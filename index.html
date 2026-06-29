@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sanctuary — Kobe · A curated residency for high performers</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
 <meta name="description" content="A private, personalised two-week experience in the mountains above Kobe, Japan — for a curated group of visionaries at the frontier of longevity and biotech. 7–25 October.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,6 +114,9 @@ header.nav{
 /* fade-in once the viewer mounts */
 .hero-model{opacity:0;animation:modelIn 2.4s 1.2s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes modelIn{to{opacity:1}}
+/* transparent layer that captures the drag for the lag controller */
+.model-drag{position:absolute;inset:0;z-index:2;cursor:grab;touch-action:pan-y}
+.model-drag.grabbing{cursor:grabbing}
 /* vignette: melt the sculpture into the void + protect type legibility */
 .model-veil{
   position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -345,6 +350,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
           execution-while-out-of-viewport execution-while-not-rendered web-share>
         </iframe>
       </div>
+      <div class="model-drag" aria-hidden="true"></div>
       <div class="model-veil" aria-hidden="true"></div>
     </div>
 
@@ -409,7 +415,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
     </div>
     <div class="place-wrap" data-reveal>
       <figure class="place-figure">
-        <img src="location.png" alt="The Sanctuary residence set into a forested mountainside above Kobe, with terrace and private court." loading="lazy" width="960" height="540">
+        <img src="location.png" alt="The Sanctuary residence set into a forested mountainside above Kobe, with terrace and private court." loading="lazy" width="1672" height="941">
       </figure>
       <div class="place-caption">
         <span class="k">Mountainside · Kobe&nbsp;六甲</span>
@@ -491,7 +497,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
   <span class="meta">By invitation · A private cohort</span>
 </footer>
 
-<!-- Sketchfab Viewer API: auto-rotate within a 180° front arc (sweeps back, never the rear) + clamp manual rotation to the same edge -->
+<!-- Sketchfab Viewer API: model rests still; hand-draggable with a very heavy lag, clamped to a 180° arc -->
 <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
 <script>
 (function(){
@@ -505,7 +511,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
     ui_watermark: 0, ui_watermark_link: 0, ui_hint: 0, ui_ar: 0,
     ui_help: 0, ui_settings: 0, ui_vr: 0, ui_fullscreen: 0,
     ui_annotations: 0, ui_loading: 0, scrollwheel: 0,
-    autospin: 0,        // rest on one side instead of rotating
+    autospin: 0,        // static; rotation is driven by our lag-drag controller
     dnt: 1, ui_animations: 0,
     success: function(api){
       api.start();
@@ -530,44 +536,44 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
             usePanConstraints: false
           });
 
-          // Gentle automatic rotation that sweeps left<->right INSIDE the arc and eases
-          // at the edges (sine), never reaching the back. Yields when the user interacts.
-          var amp   = 70 * Math.PI / 180;   // 70° each way -> 140° total sweep
-          var omega = 2 * Math.PI / 22000;  // ~22s for a full left-right-left sweep
-          var t0    = performance.now();
-          var userActive = false, programmatic = false, resumeTimer = 0;
-
           function moveTo(az){
             var pos = [ t[0] + rH * Math.cos(az), t[1] + rH * Math.sin(az), t[2] + zH ];
-            programmatic = true;
             api.setCameraLookAt(pos, t, 0);
-            programmatic = false;
           }
-          // While the user drags, pause the auto-sweep; resume shortly after they let go.
-          api.addEventListener('camerastart', function(){ if(!programmatic) userActive = true; });
-          api.addEventListener('camerastop', function(){
-            if(programmatic) return;
-            clearTimeout(resumeTimer);
-            resumeTimer = setTimeout(function(){
-              api.getCameraLookAt(function(e, c){
-                if(e) return;
-                var cp = c.position, ct = c.target;
-                rH = Math.hypot(cp[0]-ct[0], cp[1]-ct[1]);
-                zH = cp[2]-ct[2];
-                var curAz = Math.atan2(cp[1]-ct[1], cp[0]-ct[0]);
-                var s = Math.max(-1, Math.min(1, (curAz - az0) / amp));
-                t0 = performance.now() - Math.asin(s) / omega; // continue without a jump
-                userActive = false;
-              });
-            }, 2200);
-          });
 
-          function frame(now){
-            requestAnimationFrame(frame);
-            if(userActive) return;
-            moveTo(az0 + amp * Math.sin((now - t0) * omega));
+          // No auto-rotation: the model rests still. It is hand-draggable with a very
+          // heavy lag — we capture the drag on a transparent overlay and let the camera
+          // creep toward the target each frame, clamped to the same 180° arc.
+          var center = az0, target = az0, current = az0;
+          var SENS = Math.PI / 1000;  // ~0.18° of yaw per pixel dragged
+          var LAG  = 0.012;           // very big lag: the lower this is, the slower it catches up
+          var dragging = false, lastX = 0;
+          var overlay = document.querySelector('.model-drag');
+
+          function clampAz(a){ return Math.max(center - half, Math.min(center + half, a)); }
+
+          if(overlay){
+            overlay.addEventListener('pointerdown', function(e){
+              dragging = true; lastX = e.clientX;
+              try { overlay.setPointerCapture(e.pointerId); } catch(_){}
+              overlay.classList.add('grabbing');
+            });
+            overlay.addEventListener('pointermove', function(e){
+              if(!dragging) return;
+              target = clampAz(target - (e.clientX - lastX) * SENS);
+              lastX = e.clientX;
+            });
+            function release(){ dragging = false; overlay.classList.remove('grabbing'); }
+            overlay.addEventListener('pointerup', release);
+            overlay.addEventListener('pointercancel', release);
           }
-          requestAnimationFrame(frame);
+
+          function tick(){
+            requestAnimationFrame(tick);
+            var diff = target - current;
+            if(Math.abs(diff) > 1e-4){ current += diff * LAG; moveTo(current); }
+          }
+          requestAnimationFrame(tick);
         });
       });
     },
