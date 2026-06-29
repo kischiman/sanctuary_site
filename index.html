@@ -546,7 +546,7 @@ footer .logo path{animation:none;opacity:1} /* footer logo static, revealed via 
           // creep toward the target each frame, clamped to the same 180° arc.
           var center = az0, target = az0, current = az0;
           var SENS = Math.PI / 1000;  // ~0.18° of yaw per pixel dragged
-          var LAG  = 0.012;           // very big lag: the lower this is, the slower it catches up
+          var LAG  = 0.005;           // very big lag: the lower this is, the slower it catches up
           var dragging = false, lastX = 0;
           var overlay = document.querySelector('.model-drag');
 
