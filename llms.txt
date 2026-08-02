@@ -1,0 +1,10 @@
+# Sanctuary × Mirai Tech City
+
+> A curated two-week residency for founders building products in health and longevity. Oct 10–25, 2026, Kobe, Japan.
+
+Sanctuary × Mirai Tech City is a real world innovation enclave for 5 residents, part of the Mirai Tech Popup City in Kobe's National Strategic Special Zone. Residents live and work together, test products and longevity interventions in daily life, and meet companies in Kobe's biomedical ecosystem.
+
+## Pages
+
+- [Home](/): About the residency, programme structure, how to join, outputs, cost, location.
+- [Privacy policy](/privacy): How we collect, use, and protect your data.
