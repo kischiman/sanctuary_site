@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanctuary · Chiang Mai residency, December 2026</title>
+<meta name="description" content="Sanctuary is a 16-day residency in the mountains outside Chiang Mai, 10–25 December 2026, for a small, curated group to recover their health, do deep focused work, and develop practical solutions at the intersection of AI and human nature.">
+<meta property="og:title" content="Sanctuary · Chiang Mai residency">
+<meta property="og:description" content="Sanctuary is a 16-day residency in the mountains outside Chiang Mai, 10–25 December 2026, for a small, curated group to recover their health, do deep focused work, and develop practical solutions at the intersection of AI and human nature.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thesanctuary.to/chiangmai/residency/img/house.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://thesanctuary.to/chiangmai/residency/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-width bands alternating ivory and limestone, closing on forest for logistics and applying.
+   One committed light look, taken from the Sanctuary concept site. */
+:root {
+  --ivory: #F4F1E8;
+  --limestone: #E9E5D9;
+  --paper: #FAF8F2;
+  --cream: #ECE5D2;
+  --forest: #153D32;
+  --ink-soft: #384B44;
+  --ink-mute: #5D6D66;
+  --sage: #AEC1AC;
+  --glass: #3F7D78;
+  --gold: #B69258;
+  --gold-text: #8A6935;
+  --hair: #D3CDBD;
+  --on-forest: #C9D6CF;
+  --line-forest: rgba(244, 241, 232, .16);
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Spline Sans Mono', 'SFMono-Regular', Menlo, monospace;
+  --wrap: 1180px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ivory); color: var(--forest); font-family: var(--sans); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--glass); outline-offset: 3px; border-radius: 4px; }
+
+.band { padding-block: clamp(64px, 9vw, 120px); }
+.band.stone { background: var(--limestone); }
+.band.forest { background: var(--forest); color: var(--ivory); }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+.stack { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 48px); }
+
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin: 0; }
+.eyebrow .gold { color: var(--gold-text); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 300; margin: 0; text-wrap: balance; font-variation-settings: "SOFT" 100, "WONK" 0; }
+h1 { font-size: clamp(64px, 11vw, 132px); line-height: .95; letter-spacing: -.03em; }
+h1 .sub { display: block; font-size: .32em; letter-spacing: -.01em; line-height: 1.1; margin-top: .35em; color: var(--glass); font-style: italic; }
+h2 { font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -.015em; }
+h3 { font-size: 24px; font-weight: 400; line-height: 1.2; }
+.lead { font-family: var(--serif); font-weight: 300; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.4; margin: 0; max-width: 40ch; }
+.body { color: var(--ink-soft); margin: 0; max-width: 62ch; }
+.head { display: flex; flex-direction: column; gap: 16px; }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 96px) clamp(64px, 8vw, 112px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.hero .copy { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
+.when { font-family: var(--mono); font-size: 14px; letter-spacing: .06em; color: var(--gold-text); margin: 0; }
+.hero .body { font-size: 19px; }
+.mentor { display: inline-flex; align-items: center; gap: 16px; align-self: flex-start; padding: 10px 24px 10px 10px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; }
+.mentor img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+.mentor .name { font-family: var(--serif); font-size: 24px; line-height: 1.1; margin: 2px 0 0; }
+.house { position: relative; margin: 0; }
+.house img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+.caption { position: absolute; left: -24px; bottom: 28px; padding: 14px 20px; background: var(--paper); border: 1px solid var(--hair); box-shadow: 0 16px 36px -20px rgba(21, 61, 50, .45); }
+.caption .place { font-family: var(--serif); font-size: 20px; line-height: 1.2; margin: 0; }
+.caption .small { font-size: 14px; color: var(--ink-mute); margin: 0; }
+
+/* opportunity */
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; padding: 0; margin: 0; list-style: none; }
+.card { display: flex; flex-direction: column; gap: 16px; padding: 18px 18px 24px; background: var(--paper); border: 1px solid var(--hair); border-radius: 12px; }
+.card svg { width: 100%; height: auto; display: block; }
+.card .cardtext { display: flex; flex-direction: column; gap: 8px; padding: 0 4px; }
+.card .num { margin: 0; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; color: var(--gold-text); }
+.card h3 { font-size: 23px; }
+
+/* risks and opportunities: two rows of four tiles */
+.tilerow { display: flex; flex-direction: column; gap: 14px; }
+.rowlabel.risk { color: var(--gold-text); }
+.rowlabel.opp { color: var(--glass); }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
+.tile { display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 26px; background: var(--paper); border: 1px solid var(--hair); border-top: 4px solid var(--gold); border-radius: 10px; min-width: 0; }
+.tile.opp { border-top-color: var(--glass); }
+.tile h3 { font-size: 23px; }
+.tile p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
+.tilerow { gap: 8px; }
+.body.lead { font-size: 19px; line-height: 1.6; max-width: 68ch; }
+
+/* why */
+.why-top { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border: 10px solid var(--cream); border-radius: 6px; }
+.why-top .copy { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.pillars { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 4px 0 0; list-style: none; }
+.pillars li { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 12px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; font-weight: 500; font-size: 16px; }
+.pillars svg { width: 20px; height: 20px; flex: none; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+.done { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 16px 22px; background: var(--paper); border: 1px solid var(--hair); border-radius: 6px; aspect-ratio: 4 / 3; }
+.done .big { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 4vw, 52px); line-height: 1; color: var(--gold-text); margin: 0; }
+.done .note { font-size: 15px; line-height: 1.4; color: var(--ink-soft); margin: 0; }
+
+/* cohort */
+.people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
+.person { display: flex; flex-direction: column; gap: 10px; padding: 24px 26px; background: var(--paper); border: 1px solid var(--hair); border-radius: 12px; min-width: 0; }
+.person .who { display: flex; align-items: center; gap: 16px; }
+.person .who img { width: 64px; height: 64px; flex: none; border-radius: 50%; object-fit: cover; object-position: 50% 30%; background: var(--paper); border: 1px solid var(--hair); }
+.person .id { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.person h3 { font-size: 23px; }
+.person .role { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); }
+.person p.line { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.person p.q { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
+.person.mentor-card { border-color: var(--gold); }
+
+/* timeline */
+.how { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.how .copy { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.anchors { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.anchor { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 18px; position: relative; padding-bottom: 28px; }
+.anchor:last-child { padding-bottom: 0; }
+.anchor::before { content: ""; position: absolute; left: 10px; top: 22px; bottom: 0; width: 2px; background: var(--hair); }
+.anchor:last-child::before { display: none; }
+.dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--forest); background: var(--paper); margin-top: 3px; }
+.anchor:last-child .dot { background: var(--gold); border-color: var(--gold-text); }
+.anchor .when-a { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-text); margin: 0 0 4px; }
+.anchor p.what { margin: 0; color: var(--ink-soft); }
+
+/* outcome */
+.outcome .statement { font-family: var(--serif); font-weight: 300; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.25; margin: 0; max-width: 30ch; text-wrap: balance; }
+.outcome .statement em { color: var(--glass); }
+.outcomes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; max-width: 900px; }
+.outcomes li { display: flex; gap: 14px; align-items: baseline; padding-block: 14px; border-top: 1px solid var(--hair); font-family: var(--serif); font-weight: 300; font-size: clamp(20px, 2vw, 26px); line-height: 1.3; }
+.outcomes li::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--glass); transform: translateY(-2px); }
+@media (max-width: 640px) { .outcomes { grid-template-columns: minmax(0, 1fr); } }
+
+/* logistics + join */
+.logistics { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.logistics .eyebrow { color: var(--sage); }
+.logistics h2 { color: var(--ivory); }
+.facts { margin: 0; display: flex; flex-direction: column; max-width: 900px; }
+.fact { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 8px 28px; padding-block: 20px; border-top: 1px solid var(--line-forest); }
+.fact dt { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--sage); padding-top: 4px; }
+.fact dd { margin: 0; color: var(--on-forest); }
+.offer { display: flex; flex-direction: column; gap: 14px; padding: 36px; background: var(--paper); color: var(--forest); border-top: 6px solid var(--gold); border-radius: 10px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); }
+.offer .eyebrow { color: var(--ink-mute); }
+.offer .rooms { font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 5.5vw, 68px); line-height: 1; margin: 0; }
+.offer .price { font-family: var(--serif); font-size: 30px; line-height: 1.15; color: var(--gold-text); margin: 0; }
+.offer .rule { width: 56px; height: 2px; background: var(--gold); }
+.offer .body { color: var(--ink-soft); font-size: 16px; }
+.actions { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid transparent; }
+.btn.primary { background: var(--forest); color: var(--ivory); }
+.btn.ghost { color: var(--forest); border-color: var(--hair); }
+.btn:hover { opacity: .9; }
+/* apply to join: same form and table as thesanctuary.to, so entries show in its /admin */
+.btn { cursor: pointer; font-family: var(--sans); }
+.btn.light { background: var(--ivory); color: var(--forest); }
+.applyrow { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.applyrow .small { font-size: 15px; color: var(--ink-mute); margin: 0; }
+.forest .applyrow .small { color: var(--on-forest); }
+footer { background: var(--forest); color: var(--on-forest); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding-block: 0 40px; }
+footer .wrap > div { border-top: 1px solid var(--line-forest); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+footer a { color: var(--ivory); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise .8s cubic-bezier(.22, .61, .36, 1) both; animation-delay: calc(var(--i, 0) * 110ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+}
+@media (max-width: 900px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .people { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .hero .wrap, .why-top, .how, .logistics { grid-template-columns: minmax(0, 1fr); }
+  .house img { aspect-ratio: 4 / 3; }
+  .caption { left: 12px; bottom: 12px; }
+  .portrait { aspect-ratio: 1 / 1; }
+  .fact { grid-template-columns: minmax(0, 1fr); }
+  .offer { position: static; }
+}
+@media (max-width: 460px) {
+  .tiles { grid-template-columns: minmax(0, 1fr); }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .grid { gap: 8px; }
+  .done .note { font-size: 13px; }
+  .person { padding: 20px; }
+}
+.btn { cursor: pointer; font-family: var(--sans); }
+dialog.apply { width: min(560px, calc(100vw - 32px)); max-height: 90svh; padding: 0; border: 1px solid var(--hair); border-radius: 14px; background: var(--paper); color: var(--forest); box-shadow: 0 24px 64px rgba(21, 61, 50, .25); }
+dialog.apply::backdrop { background: rgba(21, 61, 50, .45); }
+.apply form, .apply .done-msg { display: flex; flex-direction: column; gap: 18px; padding: 28px clamp(20px, 4vw, 32px) 30px; }
+.apply .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.apply h2 { font-size: clamp(30px, 4vw, 38px); }
+.apply .x { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--hair); background: transparent; color: var(--forest); font-size: 20px; line-height: 1; cursor: pointer; }
+.apply .desc { margin: 0; font-size: 16px; color: var(--ink-soft); }
+.apply label.f { display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 600; }
+.apply input[type=text], .apply input[type=email], .apply textarea { font: inherit; font-weight: 400; font-size: 16px; color: var(--forest); background: var(--ivory); border: 1px solid var(--hair); border-radius: 8px; padding: 12px 14px; width: 100%; }
+.apply textarea { resize: vertical; min-height: 96px; }
+.apply input:focus-visible, .apply textarea:focus-visible, .apply .x:focus-visible, .btn:focus-visible { outline: 2px solid var(--glass); outline-offset: 2px; }
+.apply label.c { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--ink-soft); }
+.apply label.c input { margin-top: 4px; accent-color: var(--forest); width: 16px; height: 16px; flex: none; }
+.apply label.c a { color: var(--glass); }
+.apply .err { margin: 0; font-size: 15px; color: #9B3B2A; }
+.apply .err:empty { display: none; }
+.apply .steps { margin: 0; padding: 16px 18px; border-radius: 10px; background: var(--limestone); font-size: 15px; color: var(--ink-soft); }
+.apply .steps ol { margin: 8px 0 0; padding-left: 20px; }
+.apply .btn[disabled] { opacity: .6; cursor: progress; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="copy">
+      <h1 class="rise" style="--i:1">Sanctuary</h1>
+      <p class="when rise" style="--i:1">December 10–25, 2026 · 4seas Mountain View, Chiang Mai, Thailand</p>
+      <p class="body rise" style="--i:2">Sanctuary is a 16-day residency in the mountains outside Chiang Mai bringing together a small, curated group to recover their health, do deep focused work, and develop practical solutions at the intersection of AI and human nature.</p>
+      <div class="applyrow rise" style="--i:3"><a class="btn primary" href="#apply" data-apply>Apply to join</a><p class="small">By approval · reply within 24 hours</p></div>
+    </div>
+    <figure class="house rise" style="--i:2">
+      <img src="img/house.jpg" alt="The house at 4seas Mountain View: a pale brick gable with tall pointed windows among tropical plants">
+      <figcaption class="caption">
+        <p class="place">4seas Mountain View</p>
+        <p class="small">Chiang Mai, Thailand</p>
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="band" aria-labelledby="opp-h">
+  <div class="wrap stack">
+    <h2 id="opp-h">A unique opportunity</h2>
+    <p class="body lead">I invited Michel Bauwens to take part because he can clearly articulate, with historical accuracy, how civilizational transitions have reshaped society in the past. Chiang Mai provides the perfect location with access to nature, longevity interventions, and a strong community of intellectuals and technologists.<br>I curated this space and group to learn from our conversations, from each participant’s own pursuits, and to make the most of the opportunities at the intersection of AI and human nature.</p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="cohort-h">
+  <div class="wrap stack">
+    <div class="head">
+      <p class="eyebrow">16 days</p>
+      <h2 id="cohort-h">The Cohort &amp; Core Inquiries</h2>
+    </div>
+    <ul class="people">
+      <li class="person"><div class="who"><img src="img/p/alex.svg" alt="" width="64" height="64"><div class="id"><h3>Alex</h3><p class="line">Accelerated learning framework</p></div></div><p class="q">What should a personal-dictionary tool do, what is the smallest prototype worth testing on the cohort, and what makes a curiosity photo walk work as a group ritual?</p></li>
+      <li class="person"><div class="who"><img src="img/p/anastasia.jpg" alt="" width="64" height="64"><div class="id"><h3>Anastasia Angelova</h3><p class="line">Social Innovation Game &amp; Community Hub</p></div></div><p class="q">How can a social innovation game become the core operating system of the residency rather than an add-on, and what does a focused environment need to accelerate project delivery?</p></li>
+      <li class="person"><div class="who"><img src="img/p/andrej.jpg" alt="" width="64" height="64"><div class="id"><h3>Andrej Berlin</h3><p class="line">Sanctuary Residency Chiang Mai</p></div></div><p class="q">How can we accelerate learning, and why do we need a residential container that blends healthy living, meaningful work, and collaboration?</p></li>
+      <li class="person"><div class="who"><img src="img/p/anna.jpg" alt="" width="64" height="64"><div class="id"><h3>Anna Zhu</h3><p class="line">Social media grind</p></div></div><p class="q">How do you document the entire residency daily across four social channels sustainably—and what does each channel actually need?</p></li>
+      <li class="person"><div class="who"><img src="img/p/justina.svg" alt="" width="64" height="64"><div class="id"><h3>Justina Švitraitė</h3><p class="line">Web3 Case Study Review</p></div></div><p class="q">What can we learn from the failures of Web3 projects, DAOs, and communities, and how far can we push the boundary between remote and in-person collaboration?</p></li>
+      <li class="person"><div class="who"><img src="img/p/kyle.svg" alt="" width="64" height="64"><div class="id"><h3>Kyle MacLean Smith</h3><p class="line">Agent-based Founder Support System</p></div></div><p class="q">How can an agent-based funding system become immediately useful to participants at upcoming retreats and Sanctuaries?</p></li>
+      <li class="person mentor-card"><div class="who"><img src="img/p/michel.jpg" alt="" width="64" height="64"><div class="id"><h3>Michel Bauwens</h3><span class="role">Resident Mentor</span><p class="line">Deep Dives and Seminars</p></div></div><p class="q">How do new-civilization ideas reach people at scale, and how do we pass on practical knowledge for civilizational transition?</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band stone" aria-labelledby="how-h">
+  <div class="wrap how">
+    <div class="copy">
+      <p class="eyebrow">How We Operate</p>
+      <h2 id="how-h">The Shared Timeline</h2>
+      <p class="body">In-person and hybrid participants design their own schedules and place deep-work blocks, workshops, games, and experiments onto a Shared Timeline.<br>The timeline is lightweight and opt-in, anchored by shared meals, deep-work blocks, and occasional local field trips rather than mandatory lectures or panels.</p>
+    </div>
+    <ol class="anchors">
+      <li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">Before</p><p class="what">Curation of the cohort.</p></div></li>
+      <li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">December 1 · Pre-Arrival</p><p class="what">Online planning and timeline-mapping session.</p></div></li>
+      <li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">December 10</p><p class="what">Arrival, introductions, and setting the house container.</p></div></li>
+      <li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">Mid-Residency</p><p class="what">Cohort check-in, recalibration, and synthesis.</p></div></li>
+      <li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">December 25 · Christmas Salon</p><p class="what">Final showcase of shipped prototypes, demos, and collaborative artifacts.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band outcome" aria-labelledby="out-h">
+  <div class="wrap head">
+    <p class="eyebrow" id="out-h">The Outcome</p>
+    <p class="statement">You leave on December 25 with:</p>
+    <ul class="outcomes">
+      <li>Tangible progress on your core project</li>
+      <li>Personal breakthroughs supported by the group</li>
+      <li>Lasting alliances with high-agency peers</li>
+      <li>Physical and mental reset through nature, slower rhythms, and protected focus</li>
+      <li>Unmistakable clarity on what to build, drop, or focus on next</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band stone" aria-label="Photos from previous residencies">
+  <div class="wrap stack">
+    <div class="grid" aria-label="Photos from the five previous residencies">
+      <img src="img/lights.jpg" alt="Residents on a sofa under fairy lights, with a video call on the big screen" loading="lazy">
+      <img src="img/ethcm-stage.jpg" alt="Talk on designing autonomous city pilots at ETHChiangmai 2026" loading="lazy">
+      <img src="img/olive.jpg" alt="A resident clearing branches under an olive tree" loading="lazy">
+      <img src="img/livingroom.jpg" alt="The cohort working together in a living room" loading="lazy">
+      <img src="img/hike.jpg" alt="Residents taking photos on a mountain hike" loading="lazy">
+      <img src="img/rooftop.jpg" alt="Two residents serving pasta at a rooftop dinner at sunset" loading="lazy">
+      <img src="img/tatami.jpg" alt="A resident having breakfast at a low table in a tatami room" loading="lazy">
+      <div class="done">
+        <p class="big">5</p>
+        <p class="note">residencies over the past year</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band forest" aria-labelledby="log-h">
+  <div class="wrap logistics">
+    <div class="stack" style="gap:28px">
+      <div class="head">
+        <p class="eyebrow">Logistics</p>
+        <h2 id="log-h">House Rules &amp; Cost</h2>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Accommodation &amp; Fee</dt><dd>$700 per person for the full 16 days. Everyone gets a private room at 4seas Mountain View, with a coworking space and a kitchen next door.</dd></div>
+        <div class="fact"><dt>Meals</dt><dd>Handled individually. There is a restaurant directly on-site plus smaller local restaurants within walking distance.</dd></div>
+        <div class="fact"><dt>Media &amp; Privacy</dt><dd>Off-the-record by default. While Anna is prototyping daily documentation, explicit consent is required from everyone involved before anything is published. Residents come primarily for health recovery and deep focus; publishing essays, prototypes, or research notes that emerge from the house is optional.</dd></div>
+      </dl>
+      <div class="applyrow"><a class="btn light" href="#apply" data-apply>Apply to join</a><p class="small">Participation is by approval. You will hear back within 24 hours.</p></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap"><div><span>Sanctuary · Chiang Mai</span></div></div>
+</footer>
+
+
+<dialog class="apply" id="apply" aria-labelledby="apply-h">
+  <form id="applyForm" novalidate>
+    <div class="top"><h2 id="apply-h">Apply for a spot</h2><button type="button" class="x" data-close aria-label="Close">×</button></div>
+    <p class="desc">Participation is by approval. Apply for the Chiang Mai residency, 10–25 December 2026, and you will get a response within 24 hours.</p>
+    <label class="f">Name<input type="text" name="name" autocomplete="name" placeholder="Your name"></label>
+    <label class="f">Email address<input type="email" name="email" autocomplete="email" placeholder="you@company.com"></label>
+    <label class="f">What are you building and what's the current stage?<textarea name="project" rows="3" placeholder="Tell us about your product and where it is today."></textarea></label>
+    <label class="f">What are your next steps or goals? How can the residency help you?<textarea name="next" rows="3" placeholder="Share what you want to accomplish and what support would be most useful."></textarea></label>
+    <label class="c"><input type="checkbox" name="commit">Can you commit to the full duration in person, 10.-25. December?</label>
+    <label class="c"><input type="checkbox" name="updates"><span>I want to stay in the loop through the <a href="https://andrejsnotes.substack.com/" target="_blank" rel="noopener">newsletter</a>.</span></label>
+    <p class="err" role="alert" id="applyErr"></p>
+    <div class="applyrow"><button type="submit" class="btn primary" id="applyGo">Apply to join</button></div>
+    <div class="steps"><strong>What happens next</strong><ol><li>Apply to participate</li><li>Qualification call with Andrej</li><li>Get approved and join the cohort</li><li>Travel to Thailand and join us</li></ol></div>
+  </form>
+  <div class="done-msg" id="applyDone" hidden>
+    <div class="top"><p class="eyebrow">You’re on the waitlist</p><button type="button" class="x" data-close aria-label="Close">×</button></div>
+    <h2>Thank you for joining.</h2>
+    <p class="desc">We’ll reply within 24 hours. If it looks like a fit, the next step may be a short conversation with Andrej, online or in person.</p>
+  </div>
+</dialog>
+<script>
+(() => {
+  // Same Supabase table and publishable key as the "Apply to join" dialog on the
+  // main site, so applications land in /admin; source marks them as from this page.
+  const SB = 'https://clzsveiulfjwejthsipg.supabase.co';
+  const KEY = 'sb_publishable_IDc8aZKABNAqHWrQ1C5BzQ_Pz1lgDfH';
+  const dlg = document.getElementById('apply');
+  const form = document.getElementById('applyForm');
+  const err = document.getElementById('applyErr');
+  const go = document.getElementById('applyGo');
+  const done = document.getElementById('applyDone');
+  let busy = false;
+  document.querySelectorAll('[data-apply]').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); form.hidden = false; done.hidden = true; err.textContent = ''; dlg.showModal();
+  }));
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
+  const fail = m => { err.textContent = m; };
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (busy) return;
+    const f = new FormData(form);
+    const name = String(f.get('name') || '').trim();
+    const email = String(f.get('email') || '').trim();
+    const project = String(f.get('project') || '').trim();
+    const next = String(f.get('next') || '').trim();
+    if (!name) return fail('Please enter your name.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('Please enter a valid email address.');
+    if (!project) return fail('Please tell us what you are building and its current stage.');
+    if (!next) return fail('Please share your next steps and how the residency can help.');
+    if (!f.get('commit')) return fail('Please confirm that you can attend the full residency in person.');
+    const struggles = `Name: ${name}\n\nWhat are you building and what's the current stage?\n${project}\n\nWhat are your next steps or goals? How can the residency help you?\n${next}\n\nCan commit to the full duration in person: Yes`;
+    if (struggles.length > 2000) return fail('That is a little long. Please shorten your answers.');
+    const row = { email, struggles, source: 'sanctuary_request_join:chiangmai_residency' + (f.get('updates') ? ':updates_optin' : '') };
+    busy = true; go.disabled = true; go.textContent = 'Sending…'; err.textContent = '';
+    try {
+      const r = await fetch(SB + '/rest/v1/interest_submissions', {
+        method: 'POST',
+        headers: { apikey: KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify(row),
+      });
+      if (!r.ok) throw new Error('insert ' + r.status);
+      fetch(SB + '/functions/v1/notify-submission', {
+        method: 'POST', headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(row),
+      }).catch(() => {});
+      form.reset(); form.hidden = true; done.hidden = false;
+    } catch (x) {
+      console.error(x);
+      fail('Something went wrong sending your request. Please try again in a moment.');
+    } finally {
+      busy = false; go.disabled = false; go.textContent = 'Apply to join';
+    }
+  });
+})();
+</script>
+</body>
+</html>

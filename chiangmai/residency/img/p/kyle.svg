@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Generated sigil for Kyle MacLean Smith">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#9CBBA8" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#F2EFE6" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F2EFE6"/>
+  <rect width="400" height="400" fill="url(#g)"/>
+  <circle cx="200" cy="200" r="59.7" fill="none" stroke="#9CBBA8"
+             stroke-width="1.6" opacity=".7"
+             stroke-dasharray="47 32"
+             transform="rotate(148 200 200)"/><circle cx="200" cy="200" r="80.7" fill="none" stroke="#9CBBA8"
+             stroke-width="2.2" opacity=".7"
+             stroke-dasharray="23 21"
+             transform="rotate(128 200 200)"/><circle cx="200" cy="200" r="109.9" fill="none" stroke="#9CBBA8"
+             stroke-width="1.1" opacity=".7"
+             stroke-dasharray="47 34"
+             transform="rotate(323 200 200)"/><line x1="200.0" y1="74.8" x2="294.5" y2="105.5"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="294.5" y1="105.5" x2="318.4" y2="200.0"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="318.4" y1="200.0" x2="294.1" y2="294.1"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="294.1" y1="294.1" x2="200.0" y2="329.9"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="200.0" y1="329.9" x2="106.3" y2="293.7"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="106.3" y1="293.7" x2="78.8" y2="200.0"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="78.8" y1="200.0" x2="111.7" y2="111.7"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><line x1="111.7" y1="111.7" x2="200.0" y2="74.8"
+             stroke="#4A7A5E" stroke-width="1.1" opacity=".5"/><circle cx="200.0" cy="74.8" r="6.0" fill="#4A7A5E" opacity=".9"/><circle cx="294.5" cy="105.5" r="3.1" fill="#4A7A5E" opacity=".9"/><circle cx="318.4" cy="200.0" r="3.2" fill="#4A7A5E" opacity=".9"/><circle cx="294.1" cy="294.1" r="3.3" fill="#4A7A5E" opacity=".9"/><circle cx="200.0" cy="329.9" r="3.4" fill="#4A7A5E" opacity=".9"/><circle cx="106.3" cy="293.7" r="5.2" fill="#4A7A5E" opacity=".9"/><circle cx="78.8" cy="200.0" r="4.8" fill="#4A7A5E" opacity=".9"/><circle cx="111.7" cy="111.7" r="4.6" fill="#4A7A5E" opacity=".9"/>
+  <circle cx="200" cy="200" r="42" fill="#F7F5EF" opacity=".88"/>
+  <text x="200" y="200" text-anchor="middle" dominant-baseline="central"
+        font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="34"
+        letter-spacing="2" fill="#4A7A5E">KM</text>
+</svg>
