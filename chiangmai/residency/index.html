@@ -269,17 +269,18 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 @media (max-width: 760px) { .loc-grid { grid-template-columns: minmax(0, 1fr); } .loc-hero { aspect-ratio: 4 / 3; } }
 .anchors.programme { max-width: 640px; }
 .band[aria-labelledby="emb-h"] { padding-top: 0; }
-.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
-.project { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--hair); border-top: 4px solid var(--glass); border-radius: 12px; min-width: 0; overflow: hidden; }
+.projects { align-items: start; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 0; margin: 0; list-style: none; }
+.project { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--hair); border-top: 3px solid var(--glass); border-radius: 10px; min-width: 0; overflow: hidden; }
 .project .cover { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--limestone); }
-.project .pbody { display: flex; flex-direction: column; gap: 8px; padding: 24px 26px; }
-.project .comment { margin: 6px 0 0; padding-left: 14px; border-left: 2px solid var(--gold); font-family: var(--serif); font-weight: 300; font-size: 18px; line-height: 1.45; color: var(--forest); white-space: pre-wrap; }
-.project h3 { font-size: 23px; }
+.project .pbody { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 16px; }
+.project .comment { margin: 4px 0 0; padding-left: 10px; border-left: 2px solid var(--gold); font-family: var(--serif); font-weight: 300; font-size: 15px; line-height: 1.45; color: var(--forest); white-space: pre-wrap; }
+.project h3 { font-size: 18px; }
 .project h3 a { text-decoration: none; }
 .project h3 a:hover { color: var(--glass); }
-.project .by { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); margin: 0; }
-.project p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
-@media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
+.project .by { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); margin: 0; }
+.project p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+@media (max-width: 960px) { .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
