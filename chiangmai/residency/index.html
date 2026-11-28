@@ -291,6 +291,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 .join .jt { font-family: var(--serif); font-size: 23px; font-weight: 400; }
 .join .js { font-size: 14px; color: var(--ink-mute); }
 dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
+.tag-online { display: inline-block; margin-left: 8px; padding: 2px 8px; vertical-align: 4px; border: 1px solid var(--glass); border-radius: 999px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; line-height: 1.5; color: var(--glass); font-weight: 500; }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
@@ -584,6 +585,7 @@ dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
     card.removeAttribute('role'); card.removeAttribute('tabindex');
     if (!p) return;
     const role = card.querySelector('.role');
+    if (p.attendance === 'Online') card.querySelector('h3').insertAdjacentHTML('beforeend', ' <span class="tag-online">Online</span>');
     profiles[name] = { ...p, name, summary: p.persona, title: role ? role.textContent : '', photo: card.querySelector('.who img').getAttribute('src') };
     card.dataset.key = name;
     clickable(card);
@@ -596,7 +598,8 @@ dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
     list.innerHTML = people.map((p) => {
       profiles[p.id] = p;
       return '<li class="person' + (p.anchor ? ' mentor-card' : '') + '" data-key="' + esc(p.id) + '"><div class="who">' +
-        '<img src="' + esc(p.photo) + '" alt="" width="64" height="64" loading="lazy"><div class="id"><h3>' + esc(p.name) + '</h3>' +
+        '<img src="' + esc(p.photo) + '" alt="" width="64" height="64" loading="lazy"><div class="id"><h3>' + esc(p.name) +
+        (p.attendance === 'Online' ? ' <span class="tag-online">Online</span>' : '') + '</h3>' +
         (p.title ? '<span class="role">' + esc(p.title) + '</span>' : '') +
         (p.line ? '<p class="line">' + esc(p.line) + '</p>' : '') + '</div></div></li>';
     }).join('') + JOIN_CARD;
