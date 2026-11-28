@@ -464,7 +464,7 @@ dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
     <label class="f">Email address<input type="email" name="email" autocomplete="email" placeholder="you@company.com"></label>
     <label class="f">What are you building and what's the current stage?<textarea name="project" rows="3" placeholder="Tell us about your product and where it is today."></textarea></label>
     <label class="f">What are your next steps or goals? How can the residency help you?<textarea name="next" rows="3" placeholder="Share what you want to accomplish and what support would be most useful."></textarea></label>
-    <label class="c"><input type="checkbox" name="commit">Can you commit to the full duration in person, 10.-25. December?</label>
+    <label class="c"><input type="checkbox" name="commit">Can you commit to the full duration in person, 10.-25. December? (optional)</label>
     <label class="c"><input type="checkbox" name="updates"><span>I want to stay in the loop through the <a href="https://andrejsnotes.substack.com/" target="_blank" rel="noopener">newsletter</a>.</span></label>
     <p class="err" role="alert" id="applyErr"></p>
     <div class="applyrow"><button type="submit" class="btn primary" id="applyGo">Apply to join</button></div>
@@ -506,8 +506,7 @@ dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('Please enter a valid email address.');
     if (!project) return fail('Please tell us what you are building and its current stage.');
     if (!next) return fail('Please share your next steps and how the residency can help.');
-    if (!f.get('commit')) return fail('Please confirm that you can attend the full residency in person.');
-    const struggles = `Name: ${name}\n\nWhat are you building and what's the current stage?\n${project}\n\nWhat are your next steps or goals? How can the residency help you?\n${next}\n\nCan commit to the full duration in person: Yes`;
+    const struggles = `Name: ${name}\n\nWhat are you building and what's the current stage?\n${project}\n\nWhat are your next steps or goals? How can the residency help you?\n${next}\n\nCan commit to the full duration in person: ${f.get('commit') ? 'Yes' : 'No'}`;
     if (struggles.length > 2000) return fail('That is a little long. Please shorten your answers.');
     const row = { email, struggles, source: 'sanctuary_request_join:chiangmai_residency' + (f.get('updates') ? ':updates_optin' : '') };
     busy = true; go.disabled = true; go.textContent = 'Sending…'; err.textContent = '';
