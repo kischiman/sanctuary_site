@@ -290,6 +290,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 .join .plus { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--hair); font-size: 22px; line-height: 1; color: var(--glass); background: var(--paper); }
 .join .jt { font-family: var(--serif); font-size: 23px; font-weight: 400; }
 .join .js { font-size: 14px; color: var(--ink-mute); }
+dialog.apply .desc.price { margin-top: -6px; color: var(--forest); }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
@@ -457,6 +458,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
   <form id="applyForm" novalidate>
     <div class="top"><h2 id="apply-h">Apply for a spot</h2><button type="button" class="x" data-close aria-label="Close">×</button></div>
     <p class="desc">Participation is by approval. Apply for the Chiang Mai residency, 10–25 December 2026, and you will get a response within 24 hours.</p>
+    <p class="desc price">A night in a room costs <strong>$36</strong> (1,200 THB).</p>
     <label class="f">Name<input type="text" name="name" autocomplete="name" placeholder="Your name"></label>
     <label class="f">Email address<input type="email" name="email" autocomplete="email" placeholder="you@company.com"></label>
     <label class="f">What are you building and what's the current stage?<textarea name="project" rows="3" placeholder="Tell us about your product and where it is today."></textarea></label>
