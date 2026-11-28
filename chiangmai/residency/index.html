@@ -519,83 +519,124 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 </script>
 <dialog class="profile" id="profile" aria-labelledby="profile-h"><button type="button" class="x" data-close aria-label="Close">×</button><div class="in" id="profileBody"></div></dialog>
 <script>
-// Each resident's profile, as the Chiang Mai dashboard shows it (snapshot).
+// The cohort, profiles, programme, places and embedded projects come live from
+// the Chiang Mai dashboard, so the Sanctuary app updates this page. The HTML
+// above is the fallback: what shows if the dashboard can't be reached.
 (() => {
-  const PROFILES = {"Alex": {"persona": "Alex designs accelerated learning systems that make abstract ideas tangible. At the residency, he plans to finish his book, prototype personal-dictionary software, and lead a curiosity photo walk.", "vision": "People overcome perceived barriers to learning by understanding how things are physically constructed, making complex domains universally accessible. Clear physical definitions replace vague abstractions, allowing individuals to communicate with precision and seamlessly compare their depth of knowledge.", "project": "Accelerated learning framework", "description": "A framework and forthcoming book designed to help people learn faster by defining abstract concepts through physical words and processes. It organizes concepts into hierarchical trees anchored in physical materials and actions, helping learners identify and prioritize the essential questions needed to master a domain.", "goals": "Finish the final draft of the book, develop prototype software for personal dictionaries, and host residency activities such as a curiosity photo walk.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "What should a personal-dictionary tool do, what is the smallest prototype worth testing on the cohort, and what makes a curiosity photo walk work as a group ritual?"}, "Anastasia Angelova": {"persona": "Anastasia designs interactive experiences that revive overlooked projects and spark intellectual discourse. She wants a focused environment and like-minded peers, and to weave her game into the residency.", "vision": "A future where valuable, previously overlooked or failed ideas are revived and developed into impactful projects. People are inspired to collaborate or independently build upon these insights, leveraging current conditions and technologies to bring new solutions to life.", "project": "Social Innovation Game & Community Hub", "description": "Anastasia is developing a social innovation game where participants analyze past \"dead\" blockchain projects to identify their strengths, weaknesses, and potential for revival. This role-playing exercise aims to foster intellectual discourse and inspire new, viable projects. She is also exploring a for-profit social space, envisioned as a community hub for large gatherings and dinners, designed to connect people in a major city.", "goals": "Anastasia seeks a focused environment with like-minded individuals to accelerate her projects. She aims to integrate the social innovation game as a core component of the residency experience.", "url": "https://synchro-social.vercel.app/", "attendance": "In person, in Chiang Mai", "inquiry": "How can a social innovation game become the core operating system of the residency rather than an add-on, and what does a focused environment need to accelerate project delivery?"}, "Andrej Berlin": {"persona": "Andrej designs and runs intentional communities that blend interdisciplinary learning with healthy living. Here, he aims to keep cohorts small while finding new ways to lower their cost.", "vision": "My vision is a world where we're living together, learning from each other, and running experiments at the intersection of technology and social science. Where we eat healthy foods, live in nature, and consistently push our boundaries without burning out.", "project": "Sanctuary Residency Chiang Mai", "description": "", "goals": "He aims to keep the core Sanctuary residency cohort at nine people or fewer while lowering costs through parallel initiatives.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "How can we accelerate learning, and why do we need a residential container that blends healthy living, meaningful work, and collaboration?"}, "Anna Zhu": {"persona": "Anna is a prolific creator posting daily across four channels, exploring reality, chaos magick, AI and future utopias. At the residency, she will keep posting and documenting every day.", "vision": "Provide knowledge and experience to people regarding reality observations and chaos magick, documenting AI consequences, exploring visions for future utopia with microdosing psychedelics", "project": "Social media grind", "description": "Experimenting with social media content on 4 IG channels: anny.soulm8; babydoomer27; iamempresschaos; dmtbunny\nYouTube: the entities have told me… documentation of the process", "goals": "Post daily on all 4 channels, documenting the entire process", "url": "https://m8.life", "attendance": "In person, in Chiang Mai", "inquiry": "How do you document the entire residency daily across four social channels sustainably—and what does each channel actually need?"}, "Justina Švitraitė": {"persona": "Justina critically reviews Web3 projects, DAOs and communities to extract what their failures teach. At the residency, she will explore new models for remote and in-person collaboration.", "vision": "Orchestrating cosmological communities.", "project": "Web3 Case Study Review", "description": "Revisiting the most interesting projects from the web3 era, identifying learnings and failures.", "goals": "Find out what we can really learn from the past failures of Web3 projects, DAOs and communities. And push the boundaries of remote/IRL collaboration.", "url": "", "attendance": "Online", "inquiry": "What can we learn from the failures of Web3 projects, DAOs, and communities, and how far can we push the boundary between remote and in-person collaboration?"}, "Kyle MacLean Smith": {"persona": "Kyle designs AI-agent systems that support founders in high-failure-rate venture programs. During the residency, he aims to make his system ready for use at upcoming retreats and Sanctuaries.", "vision": "AI democratizes venture creation, making it accessible to a broader range of individuals beyond traditional 'super nerds.' AI significantly compresses the time and effort required to build venture infrastructure and applications, allowing people to create substantial projects rapidly through conversation and collaboration at retreats.", "project": "Agent-based Founder Support System", "description": "This system helps founders in high-failure-rate programs, such as the Founder Institute and VC Lab, to develop their ventures more effectively and efficiently. It leverages AI agents to produce better work in less time and provides valuable insights, making the process more user-friendly for participants in retreats and sanctuaries.", "goals": "Kyle aims to make the agent-based system available and effective for participants in the upcoming retreats and sanctuaries. He also seeks to clarify the investment lead role and the administrative structure for LPs to build confidence in the venture ecosystem.", "url": "", "attendance": "Online", "inquiry": "How can an agent-based funding system become immediately useful to participants at upcoming retreats and Sanctuaries?"}, "Michel Bauwens": {"persona": "Michel Bauwens, founder of the P2P Foundation, theorizes peer-to-peer production and the commons from Chiang Mai. He is working towards a commons-based civilization, better seminars and, in time, a neo-university.", "vision": "Envisions a world where people have clear paths and regenerative solutions, finding sanctuary and direction. Believes in fostering environments where individuals can deeply engage with ideas and build strong, committed organizations that can navigate challenging times.", "project": "Deep Dives and Seminars", "description": "Organizes deep-dive seminars that bring together groups to foster mutual understanding and collaboration across different fields. These semi-structured events aim to help participants develop a more structured mind and digest complex ideas. They are also involved with Society Protocol, a project building a web4 layer on web3 for value-sovereign communities.", "goals": "Aims to continue organizing deep-dive seminars, specifically planning a \"Civilization Transition Seminar\" in January. Seeks to improve the experience by ensuring a less exhausting format and securing funding to support participants' lodging and travel.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "How do new-civilization ideas reach people at scale, and how do we pass on practical knowledge for civilizational transition?"}};
-  const PINS = [{"name": "4seas Mountain View", "detail": "81 Moo 1 BaanPong HangDong, Chiang Mai 50230, Thailand", "url": "https://maps.app.goo.gl/NibEtTCpgjsfFhPT9", "lat": 18.746938, "lng": 98.890063}, {"name": "4seas Nimman", "detail": "", "url": "", "lat": 18.795938, "lng": 98.966313}];
+  const DATA_URL = 'https://sanctuary-sites.andrej-e4d.workers.dev/chiang-mai/api/site-data';
+  const FALLBACK_PROFILES = {"Alex": {"persona": "Alex designs accelerated learning systems that make abstract ideas tangible. At the residency, he plans to finish his book, prototype personal-dictionary software, and lead a curiosity photo walk.", "vision": "People overcome perceived barriers to learning by understanding how things are physically constructed, making complex domains universally accessible. Clear physical definitions replace vague abstractions, allowing individuals to communicate with precision and seamlessly compare their depth of knowledge.", "project": "Accelerated learning framework", "description": "A framework and forthcoming book designed to help people learn faster by defining abstract concepts through physical words and processes. It organizes concepts into hierarchical trees anchored in physical materials and actions, helping learners identify and prioritize the essential questions needed to master a domain.", "goals": "Finish the final draft of the book, develop prototype software for personal dictionaries, and host residency activities such as a curiosity photo walk.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "What should a personal-dictionary tool do, what is the smallest prototype worth testing on the cohort, and what makes a curiosity photo walk work as a group ritual?"}, "Anastasia Angelova": {"persona": "Anastasia designs interactive experiences that revive overlooked projects and spark intellectual discourse. She wants a focused environment and like-minded peers, and to weave her game into the residency.", "vision": "A future where valuable, previously overlooked or failed ideas are revived and developed into impactful projects. People are inspired to collaborate or independently build upon these insights, leveraging current conditions and technologies to bring new solutions to life.", "project": "Social Innovation Game & Community Hub", "description": "Anastasia is developing a social innovation game where participants analyze past \"dead\" blockchain projects to identify their strengths, weaknesses, and potential for revival. This role-playing exercise aims to foster intellectual discourse and inspire new, viable projects. She is also exploring a for-profit social space, envisioned as a community hub for large gatherings and dinners, designed to connect people in a major city.", "goals": "Anastasia seeks a focused environment with like-minded individuals to accelerate her projects. She aims to integrate the social innovation game as a core component of the residency experience.", "url": "https://synchro-social.vercel.app/", "attendance": "In person, in Chiang Mai", "inquiry": "How can a social innovation game become the core operating system of the residency rather than an add-on, and what does a focused environment need to accelerate project delivery?"}, "Andrej Berlin": {"persona": "Andrej designs and runs intentional communities that blend interdisciplinary learning with healthy living. Here, he aims to keep cohorts small while finding new ways to lower their cost.", "vision": "My vision is a world where we're living together, learning from each other, and running experiments at the intersection of technology and social science. Where we eat healthy foods, live in nature, and consistently push our boundaries without burning out.", "project": "Sanctuary Residency Chiang Mai", "description": "", "goals": "He aims to keep the core Sanctuary residency cohort at nine people or fewer while lowering costs through parallel initiatives.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "How can we accelerate learning, and why do we need a residential container that blends healthy living, meaningful work, and collaboration?"}, "Anna Zhu": {"persona": "Anna is a prolific creator posting daily across four channels, exploring reality, chaos magick, AI and future utopias. At the residency, she will keep posting and documenting every day.", "vision": "Provide knowledge and experience to people regarding reality observations and chaos magick, documenting AI consequences, exploring visions for future utopia with microdosing psychedelics", "project": "Social media grind", "description": "Experimenting with social media content on 4 IG channels: anny.soulm8; babydoomer27; iamempresschaos; dmtbunny\nYouTube: the entities have told me… documentation of the process", "goals": "Post daily on all 4 channels, documenting the entire process", "url": "https://m8.life", "attendance": "In person, in Chiang Mai", "inquiry": "How do you document the entire residency daily across four social channels sustainably—and what does each channel actually need?"}, "Justina Švitraitė": {"persona": "Justina critically reviews Web3 projects, DAOs and communities to extract what their failures teach. At the residency, she will explore new models for remote and in-person collaboration.", "vision": "Orchestrating cosmological communities.", "project": "Web3 Case Study Review", "description": "Revisiting the most interesting projects from the web3 era, identifying learnings and failures.", "goals": "Find out what we can really learn from the past failures of Web3 projects, DAOs and communities. And push the boundaries of remote/IRL collaboration.", "url": "", "attendance": "Online", "inquiry": "What can we learn from the failures of Web3 projects, DAOs, and communities, and how far can we push the boundary between remote and in-person collaboration?"}, "Kyle MacLean Smith": {"persona": "Kyle designs AI-agent systems that support founders in high-failure-rate venture programs. During the residency, he aims to make his system ready for use at upcoming retreats and Sanctuaries.", "vision": "AI democratizes venture creation, making it accessible to a broader range of individuals beyond traditional 'super nerds.' AI significantly compresses the time and effort required to build venture infrastructure and applications, allowing people to create substantial projects rapidly through conversation and collaboration at retreats.", "project": "Agent-based Founder Support System", "description": "This system helps founders in high-failure-rate programs, such as the Founder Institute and VC Lab, to develop their ventures more effectively and efficiently. It leverages AI agents to produce better work in less time and provides valuable insights, making the process more user-friendly for participants in retreats and sanctuaries.", "goals": "Kyle aims to make the agent-based system available and effective for participants in the upcoming retreats and sanctuaries. He also seeks to clarify the investment lead role and the administrative structure for LPs to build confidence in the venture ecosystem.", "url": "", "attendance": "Online", "inquiry": "How can an agent-based funding system become immediately useful to participants at upcoming retreats and Sanctuaries?"}, "Michel Bauwens": {"persona": "Michel Bauwens, founder of the P2P Foundation, theorizes peer-to-peer production and the commons from Chiang Mai. He is working towards a commons-based civilization, better seminars and, in time, a neo-university.", "vision": "Envisions a world where people have clear paths and regenerative solutions, finding sanctuary and direction. Believes in fostering environments where individuals can deeply engage with ideas and build strong, committed organizations that can navigate challenging times.", "project": "Deep Dives and Seminars", "description": "Organizes deep-dive seminars that bring together groups to foster mutual understanding and collaboration across different fields. These semi-structured events aim to help participants develop a more structured mind and digest complex ideas. They are also involved with Society Protocol, a project building a web4 layer on web3 for value-sovereign communities.", "goals": "Aims to continue organizing deep-dive seminars, specifically planning a \"Civilization Transition Seminar\" in January. Seeks to improve the experience by ensuring a less exhausting format and securing funding to support participants' lodging and travel.", "url": "", "attendance": "In person, in Chiang Mai", "inquiry": "How do new-civilization ideas reach people at scale, and how do we pass on practical knowledge for civilizational transition?"}};
+  const FALLBACK_PINS = [{"name": "4seas Mountain View", "detail": "81 Moo 1 BaanPong HangDong, Chiang Mai 50230, Thailand", "url": "https://maps.app.goo.gl/NibEtTCpgjsfFhPT9", "lat": 18.746938, "lng": 98.890063}, {"name": "4seas Nimman", "detail": "", "url": "", "lat": 18.795938, "lng": 98.966313}];
   const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const dlg = document.getElementById('profile');
-  const body = document.getElementById('profileBody');
+  const web = (u) => (/^https?:[/][/]/i.test(String(u || '')) ? String(u) : '');
+  const $ = (sel) => document.querySelector(sel);
+
+  // ---- profiles: each card opens one ----
+  let profiles = {};        // card key -> profile
+  const dlg = $('#profile');
   const row = (k, v) => (v ? '<details class="row"><summary>' + k + '</summary><div class="dd">' + v + '</div></details>' : '');
   let opener = null;
   const open = (card) => {
-    const name = card.querySelector('h3').textContent.trim();
-    const p = PROFILES[name];
+    const p = profiles[card.dataset.key];
     if (!p) return;
-    const img = card.querySelector('.who img').getAttribute('src');
-    const line = card.querySelector('.line');
-    const role = card.querySelector('.role');
     const project = p.project ? esc(p.project) + (p.description ? '<span class="sub">' + esc(p.description) + '</span>' : '') : esc(p.description);
-    const link = p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.url.replace(/^https?:[/][/]/, '').replace(/[/]$/, '')) + '</a>' : '';
-    body.innerHTML =
-      '<div class="hd"><img src="' + esc(img) + '" alt=""><div><h2 id="profile-h">' + esc(name) + '</h2>' +
-      '<p class="line">' + esc([role && role.textContent, p.attendance].filter(Boolean).join(' · ')) + '</p></div></div>' +
-      (p.persona ? '<p class="persona">' + esc(p.persona) + '</p>' : '') +
-      '<div class="rows">' + row('Core inquiry', esc(p.inquiry)) + row('Vision', esc(p.vision)) + row('Project', project) + row('Current goal', esc(p.goals)) + row('Link', link) + '</div>';
+    const url = web(p.url);
+    const link = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(url.replace(/^https?:[/][/]/, '').replace(/[/]$/, '')) + '</a>' : '';
+    $('#profileBody').innerHTML =
+      '<div class="hd"><img src="' + esc(p.photo) + '" alt=""><div><h2 id="profile-h">' + esc(p.name) + '</h2>' +
+      '<p class="line">' + esc([p.title, p.attendance].filter(Boolean).join(' · ')) + '</p></div></div>' +
+      (p.summary ? '<p class="persona">' + esc(p.summary) + '</p>' : '') +
+      '<div class="rows">' + row('Core inquiry', esc(p.inquiry)) + row('Vision', esc(p.vision)) + row('Project', project) +
+        row('Current goal', esc(p.goals)) + row('Link', link) + '</div>';
     opener = card;
     dlg.showModal();
   };
-  document.querySelectorAll('.person[role="button"]').forEach((card) => {
-    if (!PROFILES[card.querySelector('h3').textContent.trim()]) { card.removeAttribute('role'); card.removeAttribute('tabindex'); return; }
-    card.insertAdjacentHTML('beforeend', '<span class="more" aria-hidden="true">More about them →</span>');
-    card.addEventListener('click', () => open(card));
-    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); } });
+  const list = $('[aria-labelledby="cohort-h"] .people');
+  list.addEventListener('click', (e) => { const c = e.target.closest('.person[data-key]'); if (c) open(c); });
+  list.addEventListener('keydown', (e) => {
+    const c = e.target.closest('.person[data-key]');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(c); }
   });
   dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
-  dlg.addEventListener('close', () => opener && opener.focus());
+  dlg.addEventListener('close', () => opener && opener.isConnected && opener.focus());
+  const clickable = (card) => {
+    card.setAttribute('role', 'button'); card.setAttribute('tabindex', '0'); card.setAttribute('aria-haspopup', 'dialog');
+    card.insertAdjacentHTML('beforeend', '<span class="more" aria-hidden="true">More about them →</span>');
+  };
 
-  // The map of the residency's places (Leaflet loads deferred).
-  const drawMap = () => {
-    const box = document.getElementById('locmap');
-    if (!box || typeof L === 'undefined' || !PINS.length) return;
+  // the fallback cards, from the HTML
+  list.querySelectorAll('.person').forEach((card) => {
+    const name = card.querySelector('h3').textContent.trim();
+    const p = FALLBACK_PROFILES[name];
+    card.removeAttribute('role'); card.removeAttribute('tabindex');
+    if (!p) return;
+    const role = card.querySelector('.role');
+    profiles[name] = { ...p, name, summary: p.persona, title: role ? role.textContent : '', photo: card.querySelector('.who img').getAttribute('src') };
+    card.dataset.key = name;
+    clickable(card);
+  });
+
+  // ---- the live version ----
+  const dayLabel = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).replace(',', '');
+  const renderCohort = (people) => {
+    profiles = {};
+    list.innerHTML = people.map((p) => {
+      profiles[p.id] = p;
+      return '<li class="person' + (p.anchor ? ' mentor-card' : '') + '" data-key="' + esc(p.id) + '"><div class="who">' +
+        '<img src="' + esc(p.photo) + '" alt="" width="64" height="64" loading="lazy"><div class="id"><h3>' + esc(p.name) + '</h3>' +
+        (p.title ? '<span class="role">' + esc(p.title) + '</span>' : '') +
+        (p.line ? '<p class="line">' + esc(p.line) + '</p>' : '') + '</div></div></li>';
+    }).join('');
+    list.querySelectorAll('.person').forEach(clickable);
+  };
+  const renderProgramme = (items) => {
+    const ol = $('.anchors.programme');
+    if (!ol) return;
+    ol.innerHTML = items.map((e) => '<li class="anchor"><span class="dot" aria-hidden="true"></span><div><p class="when-a">' +
+      esc([dayLabel(e.date), e.at, e.online && 'Online'].filter(Boolean).join(' · ')) + '</p><p class="what">' + esc(e.title) + '</p></div></li>').join('');
+  };
+  const renderEmbedded = (projects) => {
+    if (!projects.length) return;
+    $('#embeddedList').innerHTML = projects.map((p) => {
+      const url = web(p.url);
+      const img = /^https:[/][/]/i.test(p.image || '') ? p.image : '';
+      return '<li class="project">' +
+        (img ? '<img class="cover" src="' + esc(img) + '" alt="" loading="lazy">' : '') +
+        '<div class="pbody"><h3>' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.title) + ' ↗</a>' : esc(p.title)) + '</h3>' +
+        (p.owner ? '<p class="by">' + esc(p.owner) + '</p>' : '') +
+        (p.detail ? '<p>' + esc(p.detail) + '</p>' : '') +
+        (p.comment ? '<blockquote class="comment">' + esc(p.comment) + '</blockquote>' : '') + '</div></li>';
+    }).join('');
+    $('#embedded').hidden = false;
+  };
+
+  // ---- the map of the residency's places (Leaflet loads deferred) ----
+  const drawMap = (pins) => {
+    const box = $('#locmap');
+    if (!box || typeof L === 'undefined' || !pins.length) return;
     const m = L.map(box, { scrollWheelZoom: false });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(m);
     const icon = (main) => L.divIcon({ className: '', iconSize: [main ? 20 : 14, main ? 20 : 14],
       html: '<span style="display:block;width:100%;height:100%;border-radius:50%;background:' + (main ? '#B69258' : '#3F7D78') + ';border:2.5px solid #FAF8F2;box-shadow:0 0 0 3px rgba(21,61,50,.22)"></span>' });
-    const pts = PINS.map((l, i) => {
+    const pts = pins.map((l, i) => {
+      const url = web(l.url);
       L.marker([l.lat, l.lng], { icon: icon(i === 0), title: l.name }).addTo(m).bindPopup(
         '<strong>' + esc(l.name) + '</strong>' + (l.detail ? '<br>' + esc(l.detail) : '') +
-        (l.url ? '<br><a href="' + esc(l.url) + '" target="_blank" rel="noopener">Open in Google Maps</a>' : ''));
+        (url ? '<br><a href="' + esc(url) + '" target="_blank" rel="noopener">Open in Google Maps</a>' : ''));
       return [l.lat, l.lng];
     });
     if (pts.length > 1) m.fitBounds(pts, { padding: [36, 36], maxZoom: 14 }); else m.setView(pts[0], 14);
   };
-  if (document.readyState === 'complete') drawMap(); else window.addEventListener('load', drawMap);
-})();
-</script>
-<script>
-// The projects embedded in the residency, live from the Chiang Mai dashboard
-// (ticked "On website" in the Sanctuary app). Hidden when there are none.
-(() => {
-  const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  fetch('https://sanctuary-sites.andrej-e4d.workers.dev/chiang-mai/api/embedded')
-    .then((r) => (r.ok ? r.json() : { projects: [] }))
-    .then(({ projects = [] }) => {
-      if (!projects.length) return;
-      document.getElementById('embeddedList').innerHTML = projects.map((p) => {
-        const url = /^https?:[/][/]/i.test(p.url || '') ? p.url : '';
-        const img = /^https:[/][/]/i.test(p.image || '') ? p.image : '';
-        return '<li class="project">' +
-          (img ? '<img class="cover" src="' + esc(img) + '" alt="" loading="lazy">' : '') +
-          '<div class="pbody"><h3>' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.title) + ' ↗</a>' : esc(p.title)) + '</h3>' +
-          (p.owner ? '<p class="by">' + esc(p.owner) + '</p>' : '') +
-          (p.detail ? '<p>' + esc(p.detail) + '</p>' : '') +
-          (p.comment ? '<blockquote class="comment">' + esc(p.comment) + '</blockquote>' : '') + '</div></li>';
-      }).join('');
-      document.getElementById('embedded').hidden = false;
-    })
-    .catch(() => {});
+  const loaded = new Promise((r) => (document.readyState === 'complete' ? r() : window.addEventListener('load', r)));
+
+  const live = fetch(DATA_URL).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  live.then((d) => {
+    if (!d) return;
+    if (Array.isArray(d.people) && d.people.length) renderCohort(d.people);
+    if (Array.isArray(d.programme) && d.programme.length) renderProgramme(d.programme);
+    renderEmbedded(d.embedded || []);
+  });
+  Promise.all([live, loaded]).then(([d]) => drawMap(d && Array.isArray(d.places) && d.places.length ? d.places : FALLBACK_PINS));
 })();
 </script>
 </body>
