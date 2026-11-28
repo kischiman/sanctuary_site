@@ -239,12 +239,18 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 .profile .hd h2 { font-size: clamp(28px, 4vw, 36px); }
 .profile .hd .line { margin: 4px 0 0; color: var(--ink-mute); font-size: 15px; }
 .profile .persona { margin: 0; font-family: var(--serif); font-weight: 300; font-size: 20px; line-height: 1.45; }
-.profile dl { margin: 0; display: flex; flex-direction: column; }
-.profile .row { padding-block: 14px; border-top: 1px solid var(--hair); }
-.profile dt { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 4px; }
-.profile dd { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
-.profile dd .sub { display: block; margin-top: 4px; }
-.profile dd a { color: var(--glass); word-break: break-all; }
+.profile .rows { display: flex; flex-direction: column; border-bottom: 1px solid var(--hair); }
+.profile .row { border-top: 1px solid var(--hair); }
+.profile summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px; cursor: pointer; list-style: none;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); }
+.profile summary::-webkit-details-marker { display: none; }
+.profile summary::after { content: "+"; font-family: var(--sans); font-size: 22px; line-height: 1; letter-spacing: 0; color: var(--ink-mute); transition: transform .15s; }
+.profile details[open] summary::after { transform: rotate(45deg); }
+.profile summary:hover { color: var(--forest); }
+.profile summary:focus-visible { outline: 2px solid var(--glass); outline-offset: 2px; border-radius: 4px; }
+.profile .dd { padding-bottom: 16px; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
+.profile .dd .sub { display: block; margin-top: 4px; }
+.profile .dd a { color: var(--glass); word-break: break-all; }
 .profile .x { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; font-size: 26px; line-height: 1; color: var(--ink-mute); cursor: pointer; }
 .profile .x:hover { background: var(--limestone); color: var(--forest); }
 /* location */
@@ -496,7 +502,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
   const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const dlg = document.getElementById('profile');
   const body = document.getElementById('profileBody');
-  const row = (k, v) => (v ? '<div class="row"><dt>' + k + '</dt><dd>' + v + '</dd></div>' : '');
+  const row = (k, v) => (v ? '<details class="row"><summary>' + k + '</summary><div class="dd">' + v + '</div></details>' : '');
   let opener = null;
   const open = (card) => {
     const name = card.querySelector('h3').textContent.trim();
@@ -511,7 +517,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
       '<div class="hd"><img src="' + esc(img) + '" alt=""><div><h2 id="profile-h">' + esc(name) + '</h2>' +
       '<p class="line">' + esc([role && role.textContent, p.attendance].filter(Boolean).join(' · ')) + '</p></div></div>' +
       (p.persona ? '<p class="persona">' + esc(p.persona) + '</p>' : '') +
-      '<dl>' + row('Vision', esc(p.vision)) + row('Project', project) + row('Current goal', esc(p.goals)) + row('Link', link) + '</dl>';
+      '<div class="rows">' + row('Vision', esc(p.vision)) + row('Project', project) + row('Current goal', esc(p.goals)) + row('Link', link) + '</div>';
     opener = card;
     dlg.showModal();
   };
