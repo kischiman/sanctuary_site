@@ -268,6 +268,18 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
 .siteplan img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
 @media (max-width: 760px) { .loc-grid { grid-template-columns: minmax(0, 1fr); } .loc-hero { aspect-ratio: 4 / 3; } }
 .anchors.programme { max-width: 640px; }
+.band[aria-labelledby="emb-h"] { padding-top: 0; }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
+.project { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--hair); border-top: 4px solid var(--glass); border-radius: 12px; min-width: 0; overflow: hidden; }
+.project .cover { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--limestone); }
+.project .pbody { display: flex; flex-direction: column; gap: 8px; padding: 24px 26px; }
+.project .comment { margin: 6px 0 0; padding-left: 14px; border-left: 2px solid var(--gold); font-family: var(--serif); font-weight: 300; font-size: 18px; line-height: 1.45; color: var(--forest); white-space: pre-wrap; }
+.project h3 { font-size: 23px; }
+.project h3 a { text-decoration: none; }
+.project h3 a:hover { color: var(--glass); }
+.project .by { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); margin: 0; }
+.project p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
+@media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
@@ -319,6 +331,7 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
     <div class="head">
       <p class="eyebrow">16 days</p>
       <h2 id="cohort-h">The Cohort &amp; Core Inquiries</h2>
+      <p class="body">This team will take part in the residency. Click on the names to learn more about them.</p>
     </div>
     <ul class="people">
       <li tabindex="0" role="button" aria-haspopup="dialog" class="person mentor-card"><div class="who"><img src="img/p/michel.jpg" alt="" width="64" height="64"><div class="id"><h3>Michel Bauwens</h3><span class="role">Intellectual Anchor</span><p class="line">Deep Dives and Seminars</p></div></div></li>
@@ -329,6 +342,16 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
       <li tabindex="0" role="button" aria-haspopup="dialog" class="person"><div class="who"><img src="img/p/justina.svg" alt="" width="64" height="64"><div class="id"><h3>Justina Švitraitė</h3><p class="line">Web3 Case Study Review</p></div></div></li>
       <li tabindex="0" role="button" aria-haspopup="dialog" class="person"><div class="who"><img src="img/p/kyle.svg" alt="" width="64" height="64"><div class="id"><h3>Kyle MacLean Smith</h3><p class="line">Agent-based Founder Support System</p></div></div></li>
     </ul>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="emb-h" id="embedded" hidden>
+  <div class="wrap stack">
+    <div class="head">
+      <p class="eyebrow">Alongside the cohort</p>
+      <h2 id="emb-h">Embedded projects</h2>
+    </div>
+    <ul class="projects" id="embeddedList"></ul>
   </div>
 </section>
 
@@ -547,6 +570,30 @@ dialog.profile::backdrop { background: rgba(21, 61, 50, .45); }
     if (pts.length > 1) m.fitBounds(pts, { padding: [36, 36], maxZoom: 14 }); else m.setView(pts[0], 14);
   };
   if (document.readyState === 'complete') drawMap(); else window.addEventListener('load', drawMap);
+})();
+</script>
+<script>
+// The projects embedded in the residency, live from the Chiang Mai dashboard
+// (ticked "On website" in the Sanctuary app). Hidden when there are none.
+(() => {
+  const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  fetch('https://sanctuary-sites.andrej-e4d.workers.dev/chiang-mai/api/embedded')
+    .then((r) => (r.ok ? r.json() : { projects: [] }))
+    .then(({ projects = [] }) => {
+      if (!projects.length) return;
+      document.getElementById('embeddedList').innerHTML = projects.map((p) => {
+        const url = /^https?:[/][/]/i.test(p.url || '') ? p.url : '';
+        const img = /^https:[/][/]/i.test(p.image || '') ? p.image : '';
+        return '<li class="project">' +
+          (img ? '<img class="cover" src="' + esc(img) + '" alt="" loading="lazy">' : '') +
+          '<div class="pbody"><h3>' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.title) + ' ↗</a>' : esc(p.title)) + '</h3>' +
+          (p.owner ? '<p class="by">' + esc(p.owner) + '</p>' : '') +
+          (p.detail ? '<p>' + esc(p.detail) + '</p>' : '') +
+          (p.comment ? '<blockquote class="comment">' + esc(p.comment) + '</blockquote>' : '') + '</div></li>';
+      }).join('');
+      document.getElementById('embedded').hidden = false;
+    })
+    .catch(() => {});
 })();
 </script>
 </body>
